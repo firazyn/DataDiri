@@ -25,6 +25,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showNama = (TextView)findViewById(R.id.show_nama);
         showNPM = (TextView)findViewById(R.id.show_npm);
         btnDataDiri.setOnClickListener(this);
+
+        if (savedInstanceState != null) {
+            String hasil1 = savedInstanceState.getString(STATE_HASIL1);
+            String hasil2 = savedInstanceState.getString(STATE_HASIL2);
+            showNama.setText(hasil1);
+            showNPM.setText(hasil2);
+        };
     }
 
     public void onClick(View v) {
@@ -45,5 +52,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showNPM.setText("NPM: "+String.valueOf(NPM));
             }
         }
+    }
+
+    private static final String STATE_HASIL1 = "state_hasil1";
+    private static final String STATE_HASIL2 = "state_hasil2";
+
+    protected void onSaveInstanceState (Bundle outState) {
+        outState.putString(STATE_HASIL1, showNama.getText().toString());
+        outState.putString(STATE_HASIL2, showNPM.getText().toString());
+        super.onSaveInstanceState(outState);
     }
 }
